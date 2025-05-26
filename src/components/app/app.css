@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+html,
+body {
+  font-family: Arial, sans-serif;
+  height: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.container-app {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 10vw, 215px);
+  box-sizing: border-box;
+  padding-bottom: 20px;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.tabs {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.tab {
+  padding: 10px 20px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.tab.active,
+.tab:hover {
+  color: #007bff;
+}
+
+.tab.active::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #007bff;
+}
+
+.tab:focus {
+  outline: none;
+}

@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
+
+.movie-card {
+  width: 100%;
+  max-width: 500px;
+  max-height: 279px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0px 4px 12px 0px #00000026;
+  padding: 0px;
+}
+
+.movie-poster {
+  width: 183px;
+  height: 279px;
+  object-fit: cover;
+}
+
+.main-information {
+  padding: 10px 20px 2px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  height: 100%;
+}
+
+.movie-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.movie-title {
+  position: relative;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0%;
+
+  padding-bottom: 7px;
+}
+
+.movie-date {
+  padding-bottom: 9px;
+  font-family: "Inter UI", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #827e7e;
+}
+
+.movie-genres {
+  padding-bottom: 4px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: #000000a6;
+  transition: color 0.3s ease;
+}
+
+.movie-genres:hover {
+  color: #000000ff;
+}
+
+.movie-description {
+  max-width: 228px;
+  max-height: 129px;
+  font-family: "Inter UI", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+.rate-stars {
+  align-items: center;
+  display: flex;
+  height: 46px;
+  margin-top: auto;
+}
+
+.genre {
+  display: inline-block;
+  padding: 2px 6px;
+  margin: 0 6px 6px 0;
+  border: 1px solid #999999;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #555555;
+  cursor: default;
+  user-select: none;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.genre:hover {
+  background-color: #444444;
+  color: #ffffff;
+  border-color: #333333;
+}
+
+.movie_rating {
+  align-content: center;
+  align-items: center;
+  border-radius: 20px;
+  display: flex;
+  flex-shrink: 0;
+  height: 40px;
+  justify-content: center;
+  margin-left: auto;
+  width: 40px;
+}
+
+.movie_rating--red {
+  border: 2px solid #e90000;
+}
+
+.movie_rating--orange {
+  border: 2px solid #e97e00;
+}
+
+.movie_rating--yellow {
+  border: 2px solid #e9d100;
+}
+
+.movie_rating--green {
+  border: 2px solid #66e900;
+}
+
+.title-rating-row {
+  display: flex;
+}
