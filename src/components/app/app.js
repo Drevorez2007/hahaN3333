@@ -35,50 +35,60 @@ export default class App extends Component {
 
   movieService = new MovieService();
 
-  async componentDidMount() {
-    const genresResponse = await this.movieService.getGenres();
-    this.setState({ genres: genresResponse.genres });
+  componentDidMount() {
+    const init = async () => {
+      const genresResponse = await this.movieService.getGenres();
+      this.setState({ genres: genresResponse.genres });
 
-    const savedSession = localStorage.getItem("guestSessionId");
-    const savedExpiresAt = localStorage.getItem("expiresAt");
-    const now = new Date();
+      const savedSession = localStorage.getItem("guestSessionId");
+      const savedExpiresAt = localStorage.getItem("expiresAt");
+      const now = new Date();
 
-    if (savedSession && savedExpiresAt && new Date(savedExpiresAt) > now) {
-      this.setState(
-        {
-          guestSessionId: savedSession,
-          expiresAt: savedExpiresAt,
-        },
-        () => {
-          console.log(
-            "⚙️ fetchMovies / fetchRatedMovies — guestSessionId:",
-            this.state.guestSessionId,
-          );
-          this.fetchMovies();
-          this.fetchRatedMovies();
-        },
-      );
-    } else {
-      const session = await this.movieService.getInformationSession();
-      localStorage.setItem("guestSessionId", session.guest_session_id);
-      localStorage.setItem("expiresAt", session.expires_at);
+      if (savedSession && savedExpiresAt && new Date(savedExpiresAt) > now) {
+        this.setState(
+          {
+            guestSessionId: savedSession,
+            expiresAt: savedExpiresAt,
+          },
+          () => {
+            console.log(
+              "⚙️ fetchMovies / fetchRatedMovies — guestSessionId:",
+              this.state.guestSessionId
+            );
+            this.fetchMovies();
+            this.fetchRatedMovies();
+          }
+        );
+      } else {
+        const session = await this.movieService.getInformationSession();
+        localStorage.setItem("guestSessionId", session.guest_session_id);
+        localStorage.setItem("expiresAt", session.expires_at);
 
-      this.setState(
-        {
-          guestSessionId: session.guest_session_id,
-          expiresAt: session.expires_at,
-        },
-        () => {
-          console.log(
-            "⚙️ fetchMovies / fetchRatedMovies — guestSessionId:",
-            this.state.guestSessionId,
-          );
-          this.fetchMovies();
-          this.fetchRatedMovies();
-        },
-      );
-    }
+        this.setState(
+          {
+            guestSessionId: session.guest_session_id,
+            expiresAt: session.expires_at,
+          },
+          () => {
+            console.log(
+              "⚙️ fetchMovies / fetchRatedMovies — guestSessionId:",
+              this.state.guestSessionId
+            );
+            this.fetchMovies();
+            this.fetchRatedMovies();
+          }
+        );
+      }
+    };
+
+    init();
   }
+
+  normalizeRatedMap = (movies) =>
+    movies.reduce((acc, { id, rating }) => {
+      acc[id] = rating;
+      return acc;
+    }, {});
 
   fetchRatedMovies = async (page = 1) => {
     const { guestSessionId } = this.state;
@@ -90,10 +100,7 @@ export default class App extends Component {
       const data = await this.movieService.getRatedMovies(guestSessionId, page);
 
       const results = data?.results || [];
-      const ratedMap = {};
-      results.forEach((movie) => {
-        ratedMap[movie.id] = movie.rating;
-      });
+      const ratedMap = this.normalizeRatedMap(results);
 
       const totalPagesFromAPI = Number(data.total_pages);
       const totalResults = Number(data.total_results);
@@ -114,7 +121,7 @@ export default class App extends Component {
     } catch (err) {
       if (err && (err.status === 404 || err.message?.includes("404"))) {
         console.warn(
-          "Session may be invalid. Trying to create a new session...",
+          "Session may be invalid. Trying to create a new session..."
         );
 
         try {
@@ -132,7 +139,7 @@ export default class App extends Component {
             },
             () => {
               this.fetchRatedMovies(page);
-            },
+            }
           );
         } catch (sessionErr) {
           console.error("Failed to create new session:", sessionErr);
@@ -158,17 +165,17 @@ export default class App extends Component {
       },
       () => {
         this.fetchMovies(page);
-      },
+      }
     );
   };
 
   setActiveTab = (tab) => {
-    this.setState({ activeTab: tab, currentPage: 1 }, () => {
+    this.setState({ activeTab: tab }, () => {
       if (tab === "rated" && this.state.guestSessionId) {
-        this.fetchRatedMovies(1);
+        this.fetchRatedMovies(this.state.ratedCurrentPage);
       }
       if (tab === "search") {
-        this.fetchMovies(1);
+        this.fetchMovies(this.state.searchCurrentPage);
       }
     });
   };
@@ -187,7 +194,7 @@ export default class App extends Component {
             if (this.state.activeTab === "rated") {
               this.fetchRatedMovies();
             }
-          },
+          }
         );
       })
       .catch((err) => console.error("Rating failed", err));

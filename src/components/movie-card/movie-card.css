@@ -1,13 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
 
+.cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+
 .movie-card {
-  width: 100%;
+  flex: 1 1 45%; 
   max-width: 500px;
   max-height: 279px;
   display: flex;
   flex-direction: row;
   box-shadow: 0px 4px 12px 0px #00000026;
   padding: 0px;
+  box-sizing: border-box;
 }
 
 .movie-poster {
@@ -22,7 +31,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
   height: 100%;
 }
 
@@ -40,7 +48,6 @@
   font-size: 20px;
   line-height: 28px;
   letter-spacing: 0%;
-
   padding-bottom: 7px;
 }
 
@@ -142,4 +149,100 @@
 
 .title-rating-row {
   display: flex;
+}
+
+
+@media (max-width: 1312px) {
+  .movie-card {
+    flex: 1 1 45%; 
+    max-width: 400px; 
+    height: auto;
+  }
+
+  .movie-poster {
+    width: 150px;
+    height: auto;
+  }
+
+  .movie-title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .movie-description {
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+
+
+@media (max-width: 970px) {
+  .movie-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .movie-poster {
+    width: 140px;
+    height: auto;
+  }
+
+  .movie-title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .movie-description {
+    max-width: 100%;
+    font-size: 11px;
+  }
+
+  .main-information {
+    padding: 10px;
+  }
+
+  .rate-stars {
+    height: 36px;
+  }
+
+  .movie_rating {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 420px) {
+  .movie-card {
+    max-width: 100%;
+    height: auto;
+    flex-direction: row;
+  }
+
+  .movie-poster {
+    width: 100px;
+    height: 150px;
+    flex-shrink: 0;
+  }
+
+  .main-information {
+    padding: 8px;
+  }
+
+  .movie-title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .movie-description {
+    max-width: 100%;
+    font-size: 12px;
+    line-height: 18px;
+    -webkit-line-clamp: 3;
+  }
+
+  .rate-stars {
+    height: auto;
+    flex-wrap: wrap;
+  }
 }

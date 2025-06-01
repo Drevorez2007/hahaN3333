@@ -6,8 +6,21 @@
 }
 
 .header-search {
-  padding: 20px 0px;
-  width: 1000px;
+  padding: 20px 0;
   max-height: 38px;
   padding-left: 60px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+@media (max-width: 1024px) {
+  .header-search {
+   padding-left: 0px;
+  }
+}
+
+@media (max-width: 767px) {
+  .header-search {
+   padding-left: 0px;
+  }
 }

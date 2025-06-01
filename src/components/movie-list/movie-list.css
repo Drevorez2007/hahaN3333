@@ -12,3 +12,18 @@
   align-items: center;
   height: 200px;
 }
+
+
+@media (max-width: 1023px) and (min-width: 768px) {
+.movie-list {
+ justify-content: center;
+}
+}
+
+
+@media (max-width: 767px) {
+.header-search {
+justify-content: center;
+
+}
+}
